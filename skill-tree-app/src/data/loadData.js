@@ -9,13 +9,29 @@ export async function loadConfig() {
   if (cachedConfig) return cachedConfig
   
   try {
-    // Use a relative path so it works both in dev and when hosted under a sub-path
-    // (e.g. GitHub Pages repo sites where the app lives at /<repo>/)
-    const response = await fetch('config.json')
-    if (!response.ok) {
-      throw new Error('Failed to load config.json')
+    let config = null
+
+    // 1) Optional override: config loaded from Settings "Load config JSON"
+    try {
+      const overrideRaw = window.localStorage.getItem('skill_tree_custom_config')
+      if (overrideRaw) {
+        config = JSON.parse(overrideRaw)
+      }
+    } catch (e) {
+      console.warn('Failed to parse custom config from localStorage, ignoring override', e)
+      config = null
     }
-    const config = await response.json()
+
+    // 2) Fallback to bundled config.json if no override present
+    if (!config) {
+      // Use a relative path so it works both in dev and when hosted under a sub-path
+      // (e.g. GitHub Pages repo sites where the app lives at /<repo>/)
+      const response = await fetch('config.json')
+      if (!response.ok) {
+        throw new Error('Failed to load config.json')
+      }
+      config = await response.json()
+    }
     
     // Validate required fields
     if (!config.quests || !Array.isArray(config.quests)) {

@@ -1,0 +1,397 @@
+{
+  "appName": "Degen Onboarding Skill Tree",
+  "statTypes": {
+    "goodness": "On‑Chain XP",
+    "thoughtfulness": "Risk Management",
+    "kindness": "Community",
+    "empathy": "Public Goods"
+  },
+  "defaultStats": {
+    "goodness": 0,
+    "thoughtfulness": 0,
+    "kindness": 0,
+    "empathy": 0
+  },
+  "storageKey": "degen_onboarding_progress",
+  "quests": [
+    {
+      "id": "create_non_custodial_wallet",
+      "tier": 1,
+      "category": "Wallet Basics",
+      "title": "Create a non‑custodial wallet",
+      "description": "Install a trusted wallet (browser or mobile) and create your first non‑custodial account.",
+      "emoji": "👛",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "back_up_seed_phrase_offline",
+      "tier": 1,
+      "category": "Security Hygiene",
+      "title": "Back up your seed phrase offline",
+      "description": "Write your seed phrase on paper (or steel) and store it somewhere safe and offline.",
+      "emoji": "🔐",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "enable_wallet_security_settings",
+      "tier": 1,
+      "category": "Security Hygiene",
+      "title": "Enable basic wallet security settings",
+      "description": "Turn on password lock, auto‑lock, and phishing / scam warnings in your wallet.",
+      "emoji": "🛡️",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "fund_wallet_small_amount",
+      "tier": 1,
+      "category": "Wallet Basics",
+      "title": "Fund your wallet with a small amount",
+      "description": "Use an exchange or on‑ramp to send a tiny amount of crypto to your own wallet.",
+      "emoji": "💸",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "send_first_onchain_tx",
+      "tier": 1,
+      "category": "Wallet Basics",
+      "title": "Send your first on‑chain transaction",
+      "description": "Send a tiny test amount from your wallet to another address you control.",
+      "emoji": "📤",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "view_tx_in_block_explorer",
+      "tier": 1,
+      "category": "On‑Chain Literacy",
+      "title": "View your transaction in a block explorer",
+      "description": "Open a block explorer (like Etherscan) and inspect your transaction details.",
+      "emoji": "🔎",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "track_gas_fees_dashboard",
+      "tier": 1,
+      "category": "On‑Chain Literacy",
+      "title": "Check a gas‑fees dashboard",
+      "description": "Look at a live gas‑fees dashboard and learn what cheap vs expensive gas looks like.",
+      "emoji": "⛽",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "try_testnet_faucet",
+      "tier": 1,
+      "category": "Safe Experimentation",
+      "title": "Use a testnet faucet",
+      "description": "Request testnet tokens from a faucet and send a transaction on a test network.",
+      "emoji": "🚰",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "join_crypto_discord_or_forum",
+      "tier": 1,
+      "category": "Community",
+      "title": "Join a crypto community server",
+      "description": "Join a reputable Discord or forum and read the onboarding / rules channel.",
+      "emoji": "💬",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "follow_security_researcher",
+      "tier": 1,
+      "category": "Security Hygiene",
+      "title": "Follow one security‑minded account",
+      "description": "Follow a security researcher or auditor who posts about common scams and exploits.",
+      "emoji": "🧠",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "read_basic_defi_overview",
+      "tier": 1,
+      "category": "DeFi Basics",
+      "title": "Read a basic DeFi overview",
+      "description": "Read a beginner‑friendly article about what DeFi is and how AMMs work.",
+      "emoji": "📚",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "bookmark_scam_check_tools",
+      "tier": 1,
+      "category": "Security Hygiene",
+      "title": "Bookmark scam‑check tools",
+      "description": "Bookmark at least two tools that help you check contracts, tokens, and websites.",
+      "emoji": "📎",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "set_price_alert",
+      "tier": 1,
+      "category": "On‑Chain Literacy",
+      "title": "Set a simple price alert",
+      "description": "Configure a price alert for a major coin so you learn not to stare at charts all day.",
+      "emoji": "⏰",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "understand_hardware_wallets",
+      "tier": 1,
+      "category": "Security Hygiene",
+      "title": "Research hardware wallets",
+      "description": "Read about why hardware wallets matter and compare at least two different options.",
+      "emoji": "💾",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "connect_wallet_read_only_dapp",
+      "tier": 1,
+      "category": "Dapp Basics",
+      "title": "Connect wallet to a read‑only dapp",
+      "description": "Connect your wallet to a safe dashboard or portfolio tool in read‑only mode.",
+      "emoji": "📊",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "review_common_wallet_scams",
+      "tier": 1,
+      "category": "Security Hygiene",
+      "title": "Review common wallet scams",
+      "description": "Read a guide on common wallet scams and how to avoid signing malicious transactions.",
+      "emoji": "🚨",
+      "points": { "goodness": 1, "thoughtfulness": 1, "kindness": 0, "empathy": 0 }
+    },
+    {
+      "id": "make_first_dex_swap_small",
+      "tier": 2,
+      "category": "DeFi Basics",
+      "title": "Make a tiny DEX swap",
+      "description": "Use a trusted DEX to swap a very small amount of tokens and confirm the trade.",
+      "emoji": "🔁",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "add_token_to_wallet_view",
+      "tier": 2,
+      "category": "DeFi Basics",
+      "title": "Add a custom token to your wallet view",
+      "description": "Manually add a token contract so your wallet can display its balance correctly.",
+      "emoji": "➕",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "provide_tiny_liquidity_position",
+      "tier": 2,
+      "category": "DeFi & Yield",
+      "title": "Provide a tiny liquidity position",
+      "description": "Add a very small amount of liquidity to a major pool and observe fees / risks.",
+      "emoji": "🌊",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "stake_token_single_sided",
+      "tier": 2,
+      "category": "DeFi & Yield",
+      "title": "Stake a token single‑sided",
+      "description": "Stake a small position in a simple staking contract and learn how rewards accrue.",
+      "emoji": "📥",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "claim_defi_rewards_once",
+      "tier": 2,
+      "category": "DeFi & Yield",
+      "title": "Claim DeFi rewards",
+      "description": "Claim staking or liquidity rewards and see how claiming affects your gas usage.",
+      "emoji": "🎁",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "bridge_to_layer2",
+      "tier": 2,
+      "category": "On‑Chain Mobility",
+      "title": "Bridge funds to a Layer 2",
+      "description": "Use an official or trusted bridge to move a small amount of funds to a Layer 2.",
+      "emoji": "🌉",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "mint_first_nft_low_cost",
+      "tier": 2,
+      "category": "NFT Basics",
+      "title": "Mint your first low‑cost NFT",
+      "description": "Mint a free or very cheap NFT to understand the minting and metadata flow.",
+      "emoji": "🖼️",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "list_nft_for_sale_test",
+      "tier": 2,
+      "category": "NFT Basics",
+      "title": "List an NFT for sale (test)",
+      "description": "List a low‑value NFT for sale on a marketplace and then cancel the listing.",
+      "emoji": "🏷️",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "join_nft_or_defi_discord",
+      "tier": 2,
+      "category": "Community",
+      "title": "Join an NFT or DeFi project Discord",
+      "description": "Join a project server, read the FAQ, and react to the rules message.",
+      "emoji": "🧑‍🎨",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "vote_in_snapshot_proposal",
+      "tier": 2,
+      "category": "DAOs & Governance",
+      "title": "Vote in an off‑chain proposal",
+      "description": "Use Snapshot or a similar tool to vote in a governance poll with your wallet.",
+      "emoji": "🗳️",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "post_introduction_in_dao",
+      "tier": 2,
+      "category": "DAOs & Governance",
+      "title": "Post an intro in a DAO server",
+      "description": "Introduce yourself in a DAO or community server and state what you want to learn.",
+      "emoji": "🙋",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "use_multisig_simulator",
+      "tier": 2,
+      "category": "Security Hygiene",
+      "title": "Experiment with a multisig simulator",
+      "description": "Use a multisig UI on testnet or simulation mode to see how multiple approvals work.",
+      "emoji": "🧩",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "deposit_into_lending_market",
+      "tier": 2,
+      "category": "DeFi & Yield",
+      "title": "Deposit into a lending market",
+      "description": "Deposit a small amount into a reputable lending protocol and monitor utilization.",
+      "emoji": "🏦",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "unwind_defi_position_safely",
+      "tier": 2,
+      "category": "DeFi & Yield",
+      "title": "Unwind a DeFi position safely",
+      "description": "Withdraw or close out a position and confirm that your assets returned as expected.",
+      "emoji": "🔄",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "sign_message_for_auth",
+      "tier": 2,
+      "category": "Dapp Basics",
+      "title": "Sign a non‑transaction message",
+      "description": "Use a dapp that authenticates you by signing a message instead of sending a tx.",
+      "emoji": "✍️",
+      "points": { "goodness": 0, "kindness": 0, "thoughtfulness": 2, "empathy": 0 }
+    },
+    {
+      "id": "create_safe_spending_wallet",
+      "tier": 3,
+      "category": "Security Hygiene",
+      "title": "Create a separate spending wallet",
+      "description": "Set up a second wallet for risky experiments, keeping your main funds isolated.",
+      "emoji": "🧷",
+      "points": { "goodness": 3, "kindness": 0, "thoughtfulness": 3, "empathy": 0 }
+    },
+    {
+      "id": "try_multisig_with_friend",
+      "tier": 3,
+      "category": "Security Hygiene",
+      "title": "Set up a small multisig with a friend",
+      "description": "Create a multisig with tiny funds and execute one transaction together.",
+      "emoji": "🤝",
+      "points": { "goodness": 3, "kindness": 0, "thoughtfulness": 3, "empathy": 0 }
+    },
+    {
+      "id": "participate_onchain_governance",
+      "tier": 3,
+      "category": "DAOs & Governance",
+      "title": "Participate in an on‑chain vote",
+      "description": "Cast a vote in a real on‑chain governance proposal using your tokens.",
+      "emoji": "🏛️",
+      "points": { "goodness": 3, "kindness": 0, "thoughtfulness": 3, "empathy": 0 }
+    },
+    {
+      "id": "write_governance_comment",
+      "tier": 3,
+      "category": "DAOs & Governance",
+      "title": "Write a thoughtful governance comment",
+      "description": "Post a constructive comment on a proposal, explaining your reasoning.",
+      "emoji": "💬",
+      "points": { "goodness": 3, "kindness": 0, "thoughtfulness": 3, "empathy": 0 }
+    },
+    {
+      "id": "contribute_to_public_goods_project",
+      "tier": 3,
+      "category": "Public Goods",
+      "title": "Support a public‑goods project",
+      "description": "Donate a small amount or provide non‑monetary help to a public‑goods protocol or round.",
+      "emoji": "🌍",
+      "points": { "goodness": 3, "kindness": 0, "thoughtfulness": 3, "empathy": 0 }
+    },
+    {
+      "id": "help_new_friend_onboard",
+      "tier": 3,
+      "category": "Community",
+      "title": "Help a friend onboard safely",
+      "description": "Walk a friend through wallet setup and safety basics without touching their keys.",
+      "emoji": "🤗",
+      "points": { "goodness": 3, "kindness": 3, "thoughtfulness": 2, "empathy": 2 }
+    },
+    {
+      "id": "attend_irl_crypto_meetup",
+      "tier": 3,
+      "category": "On‑Chain Citizenship",
+      "title": "Attend an in‑person crypto meetup",
+      "description": "Join a local meetup or conference and talk to at least one builder or organizer.",
+      "emoji": "🎟️",
+      "points": { "goodness": 3, "kindness": 1, "thoughtfulness": 3, "empathy": 1 }
+    },
+    {
+      "id": "create_simple_dune_or_dashboard",
+      "tier": 3,
+      "category": "On‑Chain Literacy",
+      "title": "Create a simple on‑chain dashboard",
+      "description": "Use a tool like Dune or another analytics platform to build a basic metrics dashboard.",
+      "emoji": "📈",
+      "points": { "goodness": 3, "kindness": 0, "thoughtfulness": 3, "empathy": 0 }
+    },
+    {
+      "id": "experiment_with_contract_ui",
+      "tier": 3,
+      "category": "On‑Chain Literacy",
+      "title": "Interact with a contract UI directly",
+      "description": "Use a block‑explorer contract interface or low‑level UI to call a safe, read‑only method.",
+      "emoji": "🧪",
+      "points": { "goodness": 3, "kindness": 0, "thoughtfulness": 3, "empathy": 0 }
+    },
+    {
+      "id": "document_personal_risk_rules",
+      "tier": 3,
+      "category": "Security Hygiene",
+      "title": "Write your personal degen risk rules",
+      "description": "Write down a short set of rules for how much you risk, where, and under what conditions.",
+      "emoji": "📜",
+      "points": { "goodness": 3, "kindness": 0, "thoughtfulness": 3, "empathy": 0 }
+    },
+    {
+      "id": "ship_small_onchain_experiment",
+      "tier": 3,
+      "category": "On‑Chain Citizenship",
+      "title": "Ship a tiny on‑chain experiment",
+      "description": "Launch a tiny, clearly experimental on‑chain project or script and share what you learned.",
+      "emoji": "🚀",
+      "points": { "goodness": 3, "kindness": 1, "thoughtfulness": 3, "empathy": 0 }
+    }
+  ]
+}
+

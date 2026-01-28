@@ -177,6 +177,22 @@ Everything is configured in a **single JSON file**: `skill-tree-app/public/confi
 - `tier` can be any number (typically 1-3, but flexible)
 - `category` is for organization (used in list view)
 
+### Loading Custom Configs at Runtime
+
+You can test entirely new skill trees **without rebuilding**:
+
+- Open the app, click the **Settings (☰)** menu → **“Load config JSON”**
+- Select any JSON file that follows the config shape shown above
+- The app saves this as a custom config and reloads using your new tree
+
+This makes it easy to:
+- Ask an LLM (like ChatGPT / Cursor) to **generate a full config JSON** for a new theme  
+  (e.g. *“Create a `config_fitness.json` for 50 fitness quests with stats Strength / Stamina / Mobility / Mindfulness in the same format as my existing config.json.”*)
+- Drop that file into `skill-tree-app/public/` or your local machine
+- Use **“Load config JSON”** to instantly switch the app to that new tree
+
+As long as the JSON matches the `config.json` structure, the UI will adapt automatically (stats, quests, tiers, labels, and scoring).
+
 ### Using in Other Projects
 
 1. Copy the `skill-tree-app` folder
