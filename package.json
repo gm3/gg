@@ -1,0 +1,10 @@
+{
+  "name": "humanity-skill-tree",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npm run dev --prefix skill-tree-app",
+    "build": "npm run build --prefix skill-tree-app",
+    "preview": "npm run preview --prefix skill-tree-app"
+  }
+}
