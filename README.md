@@ -1,6 +1,6 @@
-# 🌱 Humanity Skill Tree – Gamified Good Deeds Tracker
+# 🌱 GG – Gamify Goodness Skill Trees
 
-*A modular, fullscreen skill tree application that gamifies real-life kindness and humanitarian actions. Built with Vite, vanilla JavaScript, and designed for maximum reusability.*
+*A modular, fullscreen skill tree engine that gamifies real-life goals (like kindness, degen onboarding, or anything else you can dream up). Built with Vite, vanilla JavaScript, and designed for maximum reusability.*
 
 > "You can't max out kindness. You can only practice it."
 
@@ -200,6 +200,8 @@ As long as the JSON matches the `config.json` structure, the UI will adapt autom
 3. Customize styling in `src/styles/main.css` if needed
 4. The system will work with any stat types and quest structure, entirely driven by that one config file!
 
+You can also keep multiple configs (e.g. `config_degen.json`, `config_fitness.json`) and load them at runtime via **Settings → “Load config JSON”**. The active tree name (from `appName`) is shown in the top stats bar so users always know which profile they’re viewing.
+
 ---
 
 ## 🎮 Usage
@@ -230,8 +232,9 @@ As long as the JSON matches the `config.json` structure, the UI will adapt autom
 ### State Management
 - Modular progress store that initializes from config
 - Supports any number of stat types (defined in config)
-- Persistent localStorage with automatic save/load
+- Persistent localStorage with automatic save/load (via a small persistence adapter that can be swapped for a DB/API)
 - Reactive updates via subscription system
+- Optional evidence & review metadata per quest (see `REVIEW_FEATURE_README.md` for the current stub and integration plan)
 
 ### Responsive Breakpoints
 - **Desktop**: Tree view default, fullscreen layout
@@ -301,12 +304,6 @@ gg/
 ## 📄 License
 
 See LICENSE file for details.
-
----
-
-## 🙏 Credits
-
-Inspired by the idea that tracking and reflecting on acts of kindness can be a meaningful personal practice.
 
 ---
 

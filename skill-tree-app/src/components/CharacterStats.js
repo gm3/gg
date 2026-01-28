@@ -4,7 +4,7 @@
 
 import { getStats, getTotalPoints, getStatTypes, getStatTypeNames } from '../state/progressStore.js'
 
-export function createCharacterStats(totalCompleted, totalQuests, toggleButton = null) {
+export function createCharacterStats(totalCompleted, totalQuests, toggleButton = null, treeName = '') {
   const stats = getStats()
   const totalPoints = getTotalPoints()
   const percentage = totalQuests ? Math.round((totalCompleted / totalQuests) * 100) : 0
@@ -18,6 +18,14 @@ export function createCharacterStats(totalCompleted, totalQuests, toggleButton =
     toggleArea.className = 'character-stats__toggle'
     toggleArea.appendChild(toggleButton)
     container.appendChild(toggleArea)
+  }
+
+  // Optional tree name / profile label
+  if (treeName) {
+    const nameBadge = document.createElement('div')
+    nameBadge.className = 'character-stats__tree-name'
+    nameBadge.textContent = treeName
+    container.appendChild(nameBadge)
   }
 
   // Horizontal stats bar

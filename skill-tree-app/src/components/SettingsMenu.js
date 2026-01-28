@@ -70,6 +70,23 @@ export function createSettingsMenu(onExport, onClear) {
     closeMenu()
   })
   
+  // Demo links
+  const demoLinkBtn = document.createElement('button')
+  demoLinkBtn.className = 'settings-menu__item'
+  demoLinkBtn.textContent = 'Open demo site'
+  demoLinkBtn.addEventListener('click', () => {
+    window.open('https://gm3.github.io/gg/', '_blank')
+    closeMenu()
+  })
+
+  const repoLinkBtn = document.createElement('button')
+  repoLinkBtn.className = 'settings-menu__item'
+  repoLinkBtn.textContent = 'Open GitHub repo'
+  repoLinkBtn.addEventListener('click', () => {
+    window.open('https://github.com/gm3/gg', '_blank')
+    closeMenu()
+  })
+  
   // Clear button
   const clearBtn = document.createElement('button')
   clearBtn.className = 'settings-menu__item settings-menu__item--danger'
@@ -83,6 +100,8 @@ export function createSettingsMenu(onExport, onClear) {
   
   menuDropdown.appendChild(exportBtn)
   menuDropdown.appendChild(loadConfigBtn)
+  menuDropdown.appendChild(demoLinkBtn)
+  menuDropdown.appendChild(repoLinkBtn)
   menuDropdown.appendChild(clearBtn)
   
   function openMenu() {

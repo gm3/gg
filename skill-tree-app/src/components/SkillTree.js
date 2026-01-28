@@ -118,7 +118,7 @@ export function mountSkillTree(root, { quests, config }) {
           headerControls.appendChild(viewToggle)
           headerControls.appendChild(settingsMenu)
 
-          const characterStats = createCharacterStats(totalCompleted, totalQuests, headerControls)
+          const characterStats = createCharacterStats(totalCompleted, totalQuests, headerControls, config?.appName || 'Skill Tree')
           statsOverlay.appendChild(characterStats)
         }
         
@@ -166,7 +166,7 @@ export function mountSkillTree(root, { quests, config }) {
           headerControls.appendChild(viewToggle)
           headerControls.appendChild(settingsMenu)
 
-          const characterStats = createCharacterStats(totalCompleted, totalQuests, headerControls)
+          const characterStats = createCharacterStats(totalCompleted, totalQuests, headerControls, config?.appName || 'Skill Tree')
           statsOverlay.appendChild(characterStats)
         }
         
@@ -253,7 +253,7 @@ export function mountSkillTree(root, { quests, config }) {
     headerControls.appendChild(settingsMenu)
 
     // Create stats with toggle + settings integrated
-    const characterStats = createCharacterStats(totalCompleted, totalQuests, headerControls)
+    const characterStats = createCharacterStats(totalCompleted, totalQuests, headerControls, config?.appName || 'Skill Tree')
     statsOverlay.appendChild(characterStats)
 
     // Render based on current view
