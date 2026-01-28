@@ -492,6 +492,84 @@ body {
   box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
 }
 
+/* Evidence section (stub for future human/AI review) */
+.node-modal__evidence {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.node-modal__evidence-label {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.node-modal__evidence-input {
+  font-family: inherit;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(55, 65, 81, 0.7);
+  padding: 0.75rem;
+  resize: vertical;
+  background: rgba(0, 0, 0, 0.25);
+  color: #e5e7eb;
+  min-height: 70px;
+}
+
+.node-modal__evidence-input:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+
+.node-modal__evidence-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.node-modal__evidence-status {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(55, 65, 81, 0.4);
+  border: 1px solid rgba(75, 85, 99, 0.7);
+  color: #e5e7eb;
+}
+
+.node-modal__evidence-status[data-status='submitted'] {
+  background: rgba(251, 191, 36, 0.15);
+  border-color: rgba(251, 191, 36, 0.7);
+  color: #facc15;
+}
+
+.node-modal__evidence-status[data-status='approved'] {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.7);
+  color: #bfdbfe;
+}
+
+.node-modal__evidence-submit {
+  padding: 0.35rem 0.9rem;
+  background: rgba(34, 197, 94, 0.18);
+  border-radius: 999px;
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  color: #bbf7d0;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 140ms ease-out;
+}
+
+.node-modal__evidence-submit:hover {
+  background: rgba(34, 197, 94, 0.28);
+  border-color: rgba(34, 197, 94, 0.8);
+}
+
 /* View Toggle - integrated into stats bar */
 .view-toggle {
   display: flex;
@@ -855,6 +933,16 @@ body {
 .list-node--completed {
   background: rgba(34, 197, 94, 0.1);
   border-color: rgba(34, 197, 94, 0.3);
+}
+
+.list-node--pending-evidence {
+  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.4), 0 0 12px rgba(251, 191, 36, 0.5);
+  border-color: rgba(251, 191, 36, 0.8);
+}
+
+.list-node--approved-evidence {
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.4), 0 0 12px rgba(59, 130, 246, 0.5);
+  border-color: rgba(59, 130, 246, 0.8);
 }
 
 .list-node__main {

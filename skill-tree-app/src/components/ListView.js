@@ -2,7 +2,7 @@
 // Shows collapsible tiers with expandable nodes
 // Now accepts quests as parameter for modularity
 
-import { isQuestCompleted, toggleQuest, getState, subscribe, getStatTypeNames } from '../state/progressStore.js'
+import { isQuestCompleted, toggleQuest, getState, subscribe, getStatTypeNames, getEvidence } from '../state/progressStore.js'
 import { createNodeModal } from './NodeModal.js'
 
 // Create a collapsible tier section
@@ -86,8 +86,16 @@ function createTierSection(tierNumber, tierQuests, onNodeClick) {
 // Create a node item in the list
 function createNodeItem(quest, onNodeClick) {
   const isCompleted = isQuestCompleted(quest.id)
+  const evidence = getEvidence(quest.id)
+  const evidenceStatus = evidence.status || 'unsubmitted'
   const item = document.createElement('div')
-  item.className = `list-node ${isCompleted ? 'list-node--completed' : ''}`
+  const extraClasses =
+    evidenceStatus === 'submitted'
+      ? ' list-node--pending-evidence'
+      : evidenceStatus === 'approved'
+        ? ' list-node--approved-evidence'
+        : ''
+  item.className = `list-node ${isCompleted ? 'list-node--completed' : ''}${extraClasses}`
   item.setAttribute('data-quest-id', quest.id)
   
   const nodeMain = document.createElement('button')
@@ -210,7 +218,7 @@ export function createListView(onNodeClick, quests = []) {
   const container = document.createElement('div')
   container.className = 'list-view'
   
-  // Filter state: 'all', 'active', 'completed'
+  // Filter state: 'all', 'active', 'completed', 'in_review', 'accepted'
   let currentFilter = 'all'
   
   // Store scroll position
@@ -245,7 +253,9 @@ export function createListView(onNodeClick, quests = []) {
     const filterButtons = [
       { id: 'all', label: 'All' },
       { id: 'active', label: 'Active' },
-      { id: 'completed', label: 'Completed' }
+      { id: 'completed', label: 'Completed' },
+      { id: 'in_review', label: 'In Review' },
+      { id: 'accepted', label: 'Accepted' }
     ]
     
     filterButtons.forEach(filter => {
@@ -279,6 +289,10 @@ export function createListView(onNodeClick, quests = []) {
         questsToShow = questsForTier.filter(q => !isQuestCompleted(q.id))
       } else if (currentFilter === 'completed') {
         questsToShow = questsForTier.filter(q => isQuestCompleted(q.id))
+      } else if (currentFilter === 'in_review') {
+        questsToShow = questsForTier.filter(q => getEvidence(q.id).status === 'submitted')
+      } else if (currentFilter === 'accepted') {
+        questsToShow = questsForTier.filter(q => getEvidence(q.id).status === 'approved')
       }
       
       // Only show tier if it has quests after filtering (or if showing all)

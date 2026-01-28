@@ -1,7 +1,7 @@
 // Modal/lightbox component for displaying node details
 // Modular design for reuse in other projects
 
-import { isQuestCompleted, toggleQuest, setReflection, getState, getStatTypeNames } from '../state/progressStore.js'
+import { isQuestCompleted, toggleQuest, setReflection, getState, getStatTypeNames, getEvidence, setEvidence } from '../state/progressStore.js'
 
 export function createNodeModal(quest, onClose, onUpdate) {
   const isCompleted = isQuestCompleted(quest.id)
@@ -152,6 +152,55 @@ export function createNodeModal(quest, onClose, onUpdate) {
     reflectionSection.appendChild(reflectionTextarea)
     body.appendChild(reflectionSection)
   }
+
+  // Evidence / attachments (stub for future human/AI review)
+  const evidenceData = getEvidence(quest.id)
+  const evidenceSection = document.createElement('div')
+  evidenceSection.className = 'node-modal__evidence'
+
+  const evidenceLabel = document.createElement('label')
+  evidenceLabel.className = 'node-modal__evidence-label'
+  evidenceLabel.textContent = 'Evidence / Attachments (optional):'
+
+  const evidenceTextarea = document.createElement('textarea')
+  evidenceTextarea.className = 'node-modal__evidence-input'
+  evidenceTextarea.placeholder = 'Links to videos, images, files, or notes for a future reviewer.'
+  evidenceTextarea.rows = 3
+  evidenceTextarea.value = evidenceData.note || ''
+
+  evidenceTextarea.addEventListener('blur', () => {
+    setEvidence(quest.id, { note: evidenceTextarea.value })
+  })
+
+  const evidenceMeta = document.createElement('div')
+  evidenceMeta.className = 'node-modal__evidence-meta'
+
+  const statusChip = document.createElement('span')
+  statusChip.className = 'node-modal__evidence-status'
+  const currentStatus = evidenceData.status || 'unsubmitted'
+  statusChip.textContent = currentStatus.toUpperCase()
+  statusChip.dataset.status = currentStatus
+
+  const submitBtn = document.createElement('button')
+  submitBtn.className = 'node-modal__evidence-submit'
+  submitBtn.textContent = evidenceData.status === 'submitted' ? 'Resubmit evidence' : 'Submit for review'
+
+  submitBtn.addEventListener('click', () => {
+    // Stub behaviour: mark as "submitted" and save note.
+    setEvidence(quest.id, { note: evidenceTextarea.value, status: 'submitted' })
+    statusChip.textContent = 'SUBMITTED'
+    statusChip.dataset.status = 'submitted'
+    submitBtn.textContent = 'Resubmit evidence'
+    // In a real backend flow, this would enqueue the quest for human/AI review.
+  })
+
+  evidenceMeta.appendChild(statusChip)
+  evidenceMeta.appendChild(submitBtn)
+
+  evidenceSection.appendChild(evidenceLabel)
+  evidenceSection.appendChild(evidenceTextarea)
+  evidenceSection.appendChild(evidenceMeta)
+  body.appendChild(evidenceSection)
 
   content.appendChild(body)
   modal.appendChild(content)

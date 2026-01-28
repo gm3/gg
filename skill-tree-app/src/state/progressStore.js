@@ -1,6 +1,8 @@
-// Simple localStorage-backed progress store for quests and reflections
-// Modular design: can be reused in other games/projects
-// Now loads configuration from JSON for maximum flexibility
+// Progress store for quests and reflections.
+// - Default demo mode: uses localStorage via the persistence adapter
+// - Future-ready: game platforms can swap persistence to use a backend.
+
+import { configurePersistence, loadSnapshot, saveSnapshot } from './persistence.js'
 
 let STORAGE_KEY = 'skill_tree_progress'
 let STAT_TYPES = {}
@@ -12,6 +14,11 @@ let statTypeNames = {}
 // Initialize with config (called from main.js after loading config)
 export function initializeStore(config) {
   STORAGE_KEY = config.storageKey || 'skill_tree_progress'
+
+  // Configure persistence mode (local vs remote) without breaking the demo
+  // In config.json, platforms can set:
+  // "persistence": { "mode": "remote" }
+  configurePersistence(config)
   
   // Build STAT_TYPES object from config
   STAT_TYPES = {}
@@ -30,6 +37,7 @@ export function initializeStore(config) {
     completedQuests: [],
     lastUpdated: null,
     reflections: {},
+    evidence: {},
     stats: { ...DEFAULT_STATS }
   }
 }
@@ -51,6 +59,7 @@ let state = {
   completedQuests: [],
   lastUpdated: null,
   reflections: {}, // { [questId]: string }
+  evidence: {}, // { [questId]: { note?: string, status?: string } }
   stats: {}
 }
 
@@ -62,13 +71,32 @@ function notify() {
 
 export function loadProgress() {
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY)
-    if (!raw) {
-      // Initialize with default stats if no saved data
-      state.stats = { ...DEFAULT_STATS }
+    const parsed = window.__skillTreeInitialSnapshot || null
+
+    if (!parsed) {
+      // No initial snapshot injected; fall back to adapter (localStorage by default)
+      // Note: this is kept synchronous for backwards compatibility.
+      const syncRaw = window.localStorage.getItem(STORAGE_KEY)
+      if (!syncRaw) {
+        state.stats = { ...DEFAULT_STATS }
+        return state
+      }
+      const fallbackParsed = JSON.parse(syncRaw)
+      if (!Array.isArray(fallbackParsed.completedQuests)) {
+        state.stats = { ...DEFAULT_STATS }
+        return state
+      }
+      state = {
+        completedQuests: fallbackParsed.completedQuests,
+        lastUpdated: fallbackParsed.lastUpdated || null,
+        reflections: fallbackParsed.reflections || {},
+        evidence: fallbackParsed.evidence || {},
+        stats: fallbackParsed.stats || { ...DEFAULT_STATS }
+      }
+      notify()
       return state
     }
-    const parsed = JSON.parse(raw)
+
     if (!Array.isArray(parsed.completedQuests)) {
       state.stats = { ...DEFAULT_STATS }
       return state
@@ -77,6 +105,7 @@ export function loadProgress() {
       completedQuests: parsed.completedQuests,
       lastUpdated: parsed.lastUpdated || null,
       reflections: parsed.reflections || {},
+      evidence: parsed.evidence || {},
       stats: parsed.stats || { ...DEFAULT_STATS }
     }
     notify()
@@ -89,10 +118,9 @@ export function loadProgress() {
 
 function save() {
   try {
-    window.localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(state)
-    )
+    // Use the persistence adapter (localStorage by default).
+    // For now we keep a direct localStorage write for backward compatibility.
+    saveSnapshot(STORAGE_KEY, state)
   } catch {
     // ignore storage errors to avoid breaking UX
   }
@@ -162,7 +190,30 @@ export function clearProgress() {
     completedQuests: [],
     lastUpdated: new Date().toISOString().slice(0, 10),
     reflections: {},
+    evidence: {},
     stats: { ...DEFAULT_STATS }
+  }
+  save()
+  notify()
+}
+
+// Evidence helpers (attachments / notes / review status stubs)
+export function getEvidence(id) {
+  return state.evidence?.[id] || { note: '', status: 'unsubmitted' }
+}
+
+export function setEvidence(id, partial) {
+  const existing = state.evidence?.[id] || { note: '', status: 'unsubmitted' }
+  state = {
+    ...state,
+    evidence: {
+      ...state.evidence,
+      [id]: {
+        ...existing,
+        ...partial
+      }
+    },
+    lastUpdated: new Date().toISOString().slice(0, 10)
   }
   save()
   notify()
