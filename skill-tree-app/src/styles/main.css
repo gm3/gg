@@ -98,8 +98,8 @@ body {
 
 .skill-map__emoji {
   fill: #bbf7d0;
-  /* Slightly larger so it fills the node nicely */
-  font-size: 14px;
+  /* Larger so it fills the (now bigger) node nicely */
+  font-size: 20px;
   text-anchor: middle;
   pointer-events: none;
 }

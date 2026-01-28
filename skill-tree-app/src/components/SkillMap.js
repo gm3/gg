@@ -38,6 +38,13 @@ export function renderSkillMap(container, completedIds, onNodeClick, onHoverQues
   const baseRadius = minDim * 0.18
   const ringStep = minDim * 0.16
 
+  // Dynamic node radius: try to make nodes as large as possible
+  // without overlapping neighbors on any ring, while keeping them
+  // within a reasonable size range.
+  const maxNodeRadius = minDim * 0.045
+  const minNodeRadius = 6
+  let nodeRadius = maxNodeRadius
+
   // Precompute node positions in a radial (concentric circles) layout
   const nodes = []
 
@@ -47,6 +54,14 @@ export function renderSkillMap(container, completedIds, onNodeClick, onHoverQues
     const count = tierQuests.length || 1
     const angleStep = (Math.PI * 2) / count
     const startAngle = -Math.PI / 2 // start at top
+
+    // Compute candidate radius for this ring based on spacing
+    if (count > 1) {
+      const theta = (Math.PI * 2) / count
+      const chord = 2 * radius * Math.sin(theta / 2) // distance between neighbors
+      const candidate = Math.max(minNodeRadius, Math.min(maxNodeRadius, (chord * 0.6) / 2))
+      nodeRadius = Math.min(nodeRadius, candidate)
+    }
 
     tierQuests.forEach((q, index) => {
       const angle = startAngle + angleStep * index
@@ -61,8 +76,8 @@ export function renderSkillMap(container, completedIds, onNodeClick, onHoverQues
     const circle = document.createElementNS(svgNS, 'circle')
     circle.setAttribute('cx', String(x))
     circle.setAttribute('cy', String(y))
-    // Slightly larger radius to better hold the emoji
-    circle.setAttribute('r', '10')
+    // Dynamic radius based on spacing between nodes
+    circle.setAttribute('r', String(nodeRadius))
     circle.setAttribute('data-id', quest.id)
     circle.setAttribute('data-title', quest.title)
     circle.setAttribute('data-description', quest.description)
@@ -112,8 +127,10 @@ export function renderSkillMap(container, completedIds, onNodeClick, onHoverQues
     const label = document.createElementNS(svgNS, 'text')
     label.setAttribute('x', String(x))
     // Slight downward offset so the emoji visually centers in the circle
-    label.setAttribute('y', String(y + 3))
+    label.setAttribute('y', String(y + nodeRadius * 0.15))
     label.setAttribute('class', 'skill-map__emoji')
+    // Scale emoji with node size
+    label.setAttribute('font-size', String(nodeRadius * 1.2))
     label.setAttribute('data-id', quest.id)
     label.textContent = quest.emoji || '🍃'
 
