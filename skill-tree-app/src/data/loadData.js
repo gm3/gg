@@ -9,7 +9,9 @@ export async function loadConfig() {
   if (cachedConfig) return cachedConfig
   
   try {
-    const response = await fetch('/config.json')
+    // Use a relative path so it works both in dev and when hosted under a sub-path
+    // (e.g. GitHub Pages repo sites where the app lives at /<repo>/)
+    const response = await fetch('config.json')
     if (!response.ok) {
       throw new Error('Failed to load config.json')
     }
