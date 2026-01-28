@@ -223,15 +223,16 @@ export function createListView(onNodeClick, quests = []) {
   
   // Store scroll position
   let scrollPosition = 0
-  const scrollContainer = container.closest('.list-view-container') || container.parentElement
-  
+
   function saveScrollPosition() {
+    const scrollContainer = container.closest('.list-view-container') || container.parentElement
     if (scrollContainer) {
       scrollPosition = scrollContainer.scrollTop
     }
   }
   
   function restoreScrollPosition() {
+    const scrollContainer = container.closest('.list-view-container') || container.parentElement
     if (scrollContainer && scrollPosition > 0) {
       // Use requestAnimationFrame to ensure DOM is updated
       requestAnimationFrame(() => {
@@ -243,7 +244,29 @@ export function createListView(onNodeClick, quests = []) {
   function render() {
     // Save scroll position before clearing
     saveScrollPosition()
-    
+
+    // Capture expansion state before re-render
+    const collapsedTiers = new Set()
+    const expandedNodes = new Set()
+
+    const existingTiers = container.querySelectorAll('.list-tier')
+    existingTiers.forEach((tier) => {
+      const header = tier.querySelector('.list-tier__header')
+      const titleEl = header && header.querySelector('.list-tier__title')
+      const titleText = titleEl ? titleEl.textContent || '' : ''
+      const match = titleText.match(/Tier (\d+)/)
+      const tierNumber = match ? parseInt(match[1], 10) : null
+      if (tierNumber && header && header.getAttribute('aria-expanded') === 'false') {
+        collapsedTiers.add(tierNumber)
+      }
+    })
+
+    const existingExpandedNodes = container.querySelectorAll('.list-node.list-node--expanded')
+    existingExpandedNodes.forEach((node) => {
+      const id = node.getAttribute('data-quest-id')
+      if (id) expandedNodes.add(id)
+    })
+
     container.innerHTML = ''
     
     // Create filter buttons
@@ -301,6 +324,37 @@ export function createListView(onNodeClick, quests = []) {
         const questsForTierSection = currentFilter === 'all' ? questsForTier : questsToShow
         const tierSection = createTierSection(tierNumber, questsForTierSection, onNodeClick)
         container.appendChild(tierSection)
+      }
+    })
+
+    // Restore tier collapsed state
+    const newTiers = container.querySelectorAll('.list-tier')
+    newTiers.forEach((tier) => {
+      const header = tier.querySelector('.list-tier__header')
+      const titleEl = header && header.querySelector('.list-tier__title')
+      const titleText = titleEl ? titleEl.textContent || '' : ''
+      const match = titleText.match(/Tier (\d+)/)
+      const tierNumber = match ? parseInt(match[1], 10) : null
+      if (tierNumber && collapsedTiers.has(tierNumber)) {
+        const contentEl = tier.querySelector('.list-tier__content')
+        const iconEl = tier.querySelector('.list-tier__icon')
+        if (contentEl) contentEl.style.display = 'none'
+        if (header) header.setAttribute('aria-expanded', 'false')
+        if (iconEl) iconEl.textContent = '▶'
+        tier.classList.add('list-tier--collapsed')
+      }
+    })
+
+    // Restore node expanded state
+    const newNodes = container.querySelectorAll('.list-node')
+    newNodes.forEach((node) => {
+      const id = node.getAttribute('data-quest-id')
+      if (id && expandedNodes.has(id)) {
+        const details = node.querySelector('.list-node__details')
+        const expandIcon = node.querySelector('.list-node__expand')
+        if (details) details.style.display = 'block'
+        if (expandIcon) expandIcon.textContent = '▼'
+        node.classList.add('list-node--expanded')
       }
     })
     
